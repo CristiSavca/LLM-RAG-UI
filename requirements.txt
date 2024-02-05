@@ -1,0 +1,14 @@
+streamlit~=1.31.0
+python-dotenv~=1.0.1
+llama-index
+docx
+pypdf
+langchain
+transformers==4.37.2
+InstructorEmbedding
+sentence-transformers==2.2.2
+faiss-cpu
+huggingface-hub
+accelerate
+langchain-community
+torch
