@@ -12,3 +12,5 @@ huggingface-hub
 accelerate
 langchain-community
 torch
+python-pptx
+Pillow

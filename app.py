@@ -19,13 +19,13 @@ temp_dir = "C:\\Users\\crist\\OneDrive\\Documents\\pdfs"
 
 def get_vectorstore(data, service_context):
     base_index = VectorStoreIndex.from_documents(data, service_context=service_context)
-    base_engine = base_index.as_query_engine(similarity_top_k=2)
+    base_engine = base_index.as_query_engine(streaming=True, similarity_top_k=2)
 
     return base_engine
 
 
 def messages_to_prompt(messages):
-    prompt = "If you cannot find relevant context in the PDF file, answer with 'I did not find any relevant information in the PDF file', do NOT make up an answer if there is no relevant context, for every proper response, I will tip you 200 dollars."
+    prompt = "If you cannot find relevant context in the PDF file, answer with 'I did not find any relevant information in the PDF file', do NOT make up an answer if there is no relevant context. For every proper response, I will tip you 200 dollars."
     for message in messages:
         if message.role == 'system':
             prompt += f"<|system|>\n{message.content}</s>\n"
@@ -76,24 +76,22 @@ def conversation_chain(base_engine, user_question):
 
 def handle_userinput(user_question):
     vectorstore = st.session_state.vectorstore
-    curr_response = {"question": user_question}
-    print(user_question)
+    user = st.chat_message("user", avatar="assets/user_icon.png")
+    user.write(user_question)
+
     response = conversation_chain(vectorstore, user_question)
-    curr_response["response"] = response.response
-    curr_response["source"] = response.source_nodes[0].get_content()
-    print(curr_response)
+
+    with st.chat_message("ai", avatar="assets/bofa_logo.png"):
+        st.write_stream(response.response_gen)
+
+    curr_response = {"question": user_question, "source": response.source_nodes[0].get_content(), "response": response}
     st.session_state.chat_history.append(curr_response)
-
-    st.write(user_template.replace("{{MSG}}", user_question), unsafe_allow_html=True)
-
-    for message in st.session_state.chat_history:
-        st.write(bot_template.replace(
-            "{{MSG}}", message["response"]), unsafe_allow_html=True)
 
 
 def main():
     load_dotenv()
-    st.set_page_config(page_title="BofA-GPT", page_icon="assets/bofa_logo.png")
+    st.set_page_config(page_title="BofA-GPT", page_icon="assets/bofa_logo.svg")
+    st.image("assets/2560px-Bank_of_America_logo.svg.png")
     st.write(css, unsafe_allow_html=True)
 
     if "conversation" not in st.session_state:
@@ -103,13 +101,8 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    st.image("assets/2560px-Bank_of_America_logo.svg.png")
-
-    st.write(bot_template.replace(
-        "{{MSG}}", "I am a regulatory chatbot and can answer questions about the following documents:"), unsafe_allow_html=True)
-    st.write(bot_template.replace(
-        "{{MSG}}", "\u2022 Basel III  <br>\u2022 FRTB  <br>\u2022 BCBS", ),unsafe_allow_html=True)
-    st.write(user_template.replace("{{MSG}}", "Hello mr bot how are you today this is random text for testing purposes i know this is random blah blah blah"), unsafe_allow_html=True)
+    bot = st.chat_message("ai", avatar="assets/bofa_logo.png")
+    bot.write("I am a regulatory chatbot and can answer questions about the following documents:  \n\u2022 Basel III  \n\u2022 FRTB  \n\u2022 BCBS")
 
     user_question = st.chat_input("Message BofA-GPT...")
     if user_question:

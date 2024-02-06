@@ -49,8 +49,7 @@ bot_template = '''
 user_template = '''
 <div class="chat-message user">
     <div class="avatar">
-        <div class="user-icon">
-        </div> 
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" style="max-height: 50px; max-width: 50px; border-radius: 50%; object-fit: cover;">
     </div>
     <div class="message">{{MSG}}</div>
 </div>
