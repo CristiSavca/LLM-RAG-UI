@@ -1,13 +1,10 @@
 import streamlit as st
 from htmlTemplates import css, button_template, card_template
 from streamlit_card import card
-from streamlit_pills import pills
 
 st.set_page_config(page_title="AI Generation Tools", layout="centered")
 
 # st.title("AI Generation Tools")
-# selected = pills("Tools", ["Presentation", "Flowchart", "Image"], ["🖼️", "📊", "📷"], None)
-#st.write(selected)
 
 col1, col2, col3 = st.columns(3)
 
