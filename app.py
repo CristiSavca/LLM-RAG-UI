@@ -4,7 +4,7 @@ import torch
 import os
 from dotenv import load_dotenv
 from langchain_community.embeddings import HuggingFaceInstructEmbeddings
-from htmlTemplates import css, bot_template, user_template
+from htmlTemplates import css
 from llama_index.prompts import PromptTemplate
 from llama_index.llms import HuggingFaceLLM
 from llama_index import SimpleDirectoryReader, ServiceContext, VectorStoreIndex
