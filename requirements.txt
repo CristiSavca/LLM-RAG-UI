@@ -14,4 +14,3 @@ langchain-community
 torch
 python-pptx
 streamlit-card
-
