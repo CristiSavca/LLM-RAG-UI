@@ -102,10 +102,15 @@ def main():
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
 
-    bot = st.chat_message("ai", avatar="assets/bofa_logo.png")
-    bot.write("I am a regulatory chatbot and can answer questions about the following documents:  \n\u2022 Basel III  \n\u2022 FRTB  \n\u2022 BCBS")
+    with st.container(height=650, border=False):
+        bot = st.chat_message("ai", avatar="assets/bofa_logo.png")
+        bot.write("I am a regulatory chatbot and can answer questions about the following documents:  \n\u2022 Basel III  \n\u2022 FRTB  \n\u2022 BCBS")
 
-    user_question = st.chat_input("Message BofA-GPT...")
+    web_search_toggle, chat_input = st.columns([0.2, 0.8])
+    with web_search_toggle:
+        st.toggle(label="Web Search",)
+    with chat_input:
+        user_question = st.chat_input("Message BofA-GPT...")
     if user_question:
         handle_userinput(user_question)
 
@@ -127,3 +132,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
