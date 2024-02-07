@@ -20,6 +20,8 @@ with col5:
 with col6:
     st.button("📧Email")
 
+
+# Cards grid
 for i in range(1, 5):
     cols = st.columns(2)
     cols[0] = card(

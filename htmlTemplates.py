@@ -57,24 +57,6 @@ img {
 }
 '''
 
-bot_template = '''
-<div class="chat-message bot">
-    <div class="avatar">
-        <img src="https://investment-s3.unitedtraders.io/shares/BAC.svg" style="max-height: 50px; max-width: 50px; border-radius: 1.2rem; object-fit: cover;">
-    </div>
-    <div class="message">{{MSG}}</div>
-</div>
-'''
-
-user_template = '''
-<div class="chat-message user">
-    <div class="avatar">
-        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" style="max-height: 50px; max-width: 50px; border-radius: 50%; object-fit: cover;">
-    </div>
-    <div class="message">{{MSG}}</div>
-</div>
-'''
-
 button_template = '''
 <div class="button">
     <div class="avatar">

@@ -13,5 +13,4 @@ accelerate
 langchain-community
 torch
 python-pptx
-Pillow
 streamlit-card
