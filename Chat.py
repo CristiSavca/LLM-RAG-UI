@@ -76,8 +76,8 @@ def conversation_chain(base_engine, user_question):
 
 def handle_userinput(user_question):
     vectorstore = st.session_state.vectorstore
-    user = st.chat_message("user", avatar="assets/user_icon.png")
-    user.write(user_question)
+    with st.chat_message("user", avatar="assets/user_icon.png"):
+        st.write(user_question)
 
     response = conversation_chain(vectorstore, user_question)
 
@@ -85,6 +85,7 @@ def handle_userinput(user_question):
         st.write_stream(response.response_gen)
 
     curr_response = {"question": user_question, "source": response.source_nodes[0].get_content(), "response": response}
+    print(curr_response["source"])
     st.session_state.chat_history.append(curr_response)
 
 

@@ -35,6 +35,26 @@ css = '''
     height: 50px;
     border-radius: 50%;
     background-color: gray;
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
+  border-radius: 5px;
+  background-color: gray;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+}
+
+.container {
+  padding: 2px 16px;
+}
 '''
 
 bot_template = '''
@@ -52,5 +72,24 @@ user_template = '''
         <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" style="max-height: 50px; max-width: 50px; border-radius: 50%; object-fit: cover;">
     </div>
     <div class="message">{{MSG}}</div>
+</div>
+'''
+
+button_template = '''
+<div class="button">
+    <div class="avatar">
+        <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" style="max-height: 50px; max-width: 50px; border-radius: 50%; object-fit: cover;">
+    </div>
+    <div class="message">{{MSG}}</div>
+</div>
+'''
+
+card_template = '''
+<div class="card">
+  <img src="https://cdn-icons-png.flaticon.com/512/9131/9131529.png" alt="Avatar" style="width:10%">
+  <div class="container">
+    <h4><b>Jane Doe</b></h4> 
+    <p>Interior Designer</p> 
+  </div>
 </div>
 '''
